@@ -18,7 +18,7 @@ NOW_EPOCH=$($DATE +"%s")
 echo $NOW
 for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
 do
-    for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}')
+    for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}'|sort -r)
     do
         END_DATE=$(oc get secrets/$SECRET -n $PROJECT \
         -o template='{{index .data "tls.crt"}}' \
