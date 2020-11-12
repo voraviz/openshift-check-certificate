@@ -12,8 +12,8 @@ output(){
             printf "%s\n" "==============================================="
             printf "Project: %s\n" $PROJECT
             printf "Secret: %s\n" $SECRET
-            printf "Created at: %s\n" "$($DATE -d @$START_EPOCH)"
-            printf "Expired after: %s\n" "$($DATE -d @$END_EPOCH)"
+            printf "Created at: %s\n" "$($DATE -d @$START_EPOCH +'%d-%m-%Y %H:%M:%S')"
+            printf "Expired after: %s\n" "$($DATE -d @$END_EPOCH +'%d-%m-%Y %H:%M:%S')"
             printf "Day remaining %s \n" $DAY_REMAIN
         fi
 }
