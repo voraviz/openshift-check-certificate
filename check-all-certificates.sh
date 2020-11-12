@@ -18,10 +18,10 @@ output(){
         fi
 }
 check(){
-    if [[ $STRING =~ ^$1 ]];
+    if [[ $STRING =~ ^$CHECK ]];
         then
             NOT_ACTIVE=0
-            if [ $ELAPSED_DAY -gt $2 ];
+            if [ $ELAPSED_DAY -gt $NUM ];
             then
                PRINT=0
             fi
@@ -71,9 +71,9 @@ do
         PRINT=1
         NOT_ACTIVE=1
         # check for cert with 30 days automatically rotate
-        check kube-scheduler-client-cert-key 30
-        check kubelet-client 30
-        check kube-controller-manager-client-cert-key 30
+        CHECK=kube-scheduler-client-cert-key;NUM=30;check
+        CHECK=kubelet-client;check
+        CHECK=kube-controller-manager-client-cert-key;check
         if [ $NOT_ACTIVE -eq 0 ];
         then
             if [ $PRINT -eq 0 ];
