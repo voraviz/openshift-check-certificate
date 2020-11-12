@@ -6,7 +6,7 @@ output(){
         then
             if [ $1 == "csv" ];
             then
-                printf "%s\n" "$PROJECT,$SECRET,$($DATE -d @$START_EPOCH),$($DATE -d @$END_EPOCH),$DAY_REMAIN"
+                printf "%s\n" "$PROJECT,$SECRET,$($DATE -d @$START_EPOCH +'%d-%m-%Y %H:%M:%S'),$($DATE -d @$END_EPOCH +'%d-%m-%Y %H:%M:%S'),$DAY_REMAIN"
             fi
         else
             printf "%s\n" "==============================================="
@@ -20,7 +20,7 @@ output(){
 check(){
     if [[ $STRING =~ ^$1 ]];
         then
-            AUTO=0
+            NOT_ACTIVE=0
             if [ $ELAPSED_DAY -lt $2 ];
             then
                PRINT=0
@@ -41,6 +41,13 @@ else
     DATE=date
 fi
 NOW_EPOCH=$($DATE +"%s")
+if [ $# -gt 0 ];
+then
+     if [ $1 == "csv" ];
+        then
+                printf "%s\n" "PROJECT,SECRET,CREATED_DATE,EXPIRED_DATE,DAY_REMAIN"
+        fi
+fi
 for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
 do
     for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}'|sort -r)
@@ -62,12 +69,12 @@ do
         ELAPSED=$(expr $NOW_EPOCH - $CREATE_EPOCH)
         ELAPSED_DAY=$(expr $ELAPSED / 86400)
         PRINT=1
-        AUTO=1
-        # check for cert with 30 days automatic rotate
-        check  kube-scheduler-client-cert-key 30
-        check  kubelet-client 30
+        NOT_ACTIVE=1
+        # check for cert with 30 days automatically rotate
+        check kube-scheduler-client-cert-key 30
+        check kubelet-client 30
         check kube-controller-manager-client-cert-key 30
-        if [ $AUTO -eq 0 ];
+        if [ $NOT_ACTIVE -eq 0 ];
         then
             if [ $PRINT -eq 0 ];
             then
