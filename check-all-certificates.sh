@@ -74,6 +74,7 @@ do
         check kube-scheduler-client-cert-key 30
         check kubelet-client 30
         check kube-controller-manager-client-cert-key 30
+        check kube-apiserver-cert-syncer-client-cert-key 30
         if [ $NOT_ACTIVE -eq 0 ];
         then
             if [ $PRINT -eq 0 ];
