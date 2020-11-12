@@ -17,6 +17,16 @@ output(){
             printf "Day remaining %s \n" $DAY_REMAIN
         fi
 }
+check(){
+    if [[ $STRING =~ ^$1 ]];
+        then
+            AUTO=0
+            if [ $ELAPSED_DAY -lt $2 ];
+            then
+               PRINT=0
+            fi
+        fi
+}
 if [ $OS == "Darwin" ];
 then
     which gdate 1>/dev/null 2>&1
@@ -51,15 +61,20 @@ do
         CREATE_EPOCH=$($DATE --date="${CREATE_DATE}" +"%s")
         ELAPSED=$(expr $NOW_EPOCH - $CREATE_EPOCH)
         ELAPSED_DAY=$(expr $ELAPSED / 86400)
-        if [[ $STRING =~ ^kubelet-client ]];
+        PRINT=1
+        AUTO=1
+        # check for cert with 30 days automatic rotate
+        check  kube-scheduler-client-cert-key 30
+        check  kubelet-client 30
+        check kube-controller-manager-client-cert-key 30
+        if [ $AUTO -eq 0 ];
         then
-            # kubelet-client is automatically rotated every 30 days
-            if [ $ELAPSED_DAY -lt 30 ];
+            if [ $PRINT -eq 0 ];
             then
                 output $1
             fi
         else
-            output $1
+           output $1
         fi
     done
 done
