@@ -18,10 +18,10 @@ output(){
         fi
 }
 check(){
-    if [[ $STRING =~ ^$CHECK ]];
+    if [[ $SECRET =~ ^$1 ]];
         then
             NOT_ACTIVE=0
-            if [ $ELAPSED_DAY -gt $NUM ];
+            if [ $ELAPSED_DAY -gt $2 ];
             then
                PRINT=0
             fi
@@ -48,8 +48,9 @@ then
                 printf "%s\n" "PROJECT,SECRET,CREATED_DATE,EXPIRED_DATE,DAY_REMAIN"
         fi
 fi
-for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
-do
+# for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
+# do
+    PROJECT=openshift-kube-apiserver
     for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}'|sort -r)
     do
         END_DATE=$(oc get secrets/$SECRET -n $PROJECT \
@@ -71,9 +72,9 @@ do
         PRINT=1
         NOT_ACTIVE=1
         # check for cert with 30 days automatically rotate
-        CHECK=kube-scheduler-client-cert-key;NUM=30;check
-        CHECK=kubelet-client;check
-        CHECK=kube-controller-manager-client-cert-key;check
+        check kube-scheduler-client-cert-key 30
+        check kubelet-client 30
+        check kube-controller-manager-client-cert-key 30
         if [ $NOT_ACTIVE -eq 0 ];
         then
             if [ $PRINT -eq 0 ];
@@ -84,4 +85,4 @@ do
            output $1
         fi
     done
-done
+#done
