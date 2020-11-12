@@ -59,7 +59,7 @@ do
         START_DATE=$(oc get secrets/$SECRET -n $PROJECT \
         -o template='{{index .data "tls.crt"}}' \
         | base64 -d \
-        | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
+        | openssl x509 -noout -startdate|awk -F'notBefore=' '{print $2}')
         END_EPOCH=$($DATE --date="${END_DATE}" +"%s")
         START_EPOCH=$($DATE --date="${START_DATE}" +"%s")
         DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
