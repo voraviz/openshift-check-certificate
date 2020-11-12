@@ -21,7 +21,7 @@ check(){
     if [[ $STRING =~ ^$1 ]];
         then
             NOT_ACTIVE=0
-            if [ $ELAPSED_DAY -lt $2 ];
+            if [ $ELAPSED_DAY -gt $2 ];
             then
                PRINT=0
             fi
