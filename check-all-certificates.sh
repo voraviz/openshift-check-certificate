@@ -50,7 +50,6 @@ then
 fi
 for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
 do
-    PROJECT=openshift-kube-apiserver
     for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}'|sort -r)
     do
         END_DATE=$(oc get secrets/$SECRET -n $PROJECT \
