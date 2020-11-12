@@ -21,7 +21,7 @@ check(){
     if [[ $SECRET =~ ^$1 ]];
         then
             NOT_ACTIVE=0
-            if [ $ELAPSED_DAY -gt $2 ];
+            if [ $ELAPSED_DAY -lt $2 ];
             then
                PRINT=0
             fi
@@ -48,8 +48,8 @@ then
                 printf "%s\n" "PROJECT,SECRET,CREATED_DATE,EXPIRED_DATE,DAY_REMAIN"
         fi
 fi
-# for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
-# do
+for PROJECT in $(oc get projects --no-headers|grep 'openshift-'|awk '{print $1}')
+do
     PROJECT=openshift-kube-apiserver
     for SECRET in $(oc get secret -n $PROJECT|grep -i 'kubernetes.io/tls'|awk '{print $1}'|sort -r)
     do
@@ -85,4 +85,4 @@ fi
            output $1
         fi
     done
-#done
+done
