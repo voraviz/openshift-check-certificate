@@ -24,13 +24,27 @@ do
         -o template='{{index .data "tls.crt"}}' \
         | base64 -d \
         | openssl x509 -noout -enddate|awk -F'notAfter=' '{print $2}')
+        START_DATE=$(oc get secrets/$SECRET -n $PROJECT \
+        -o template='{{index .data "tls.crt"}}' \
+        | base64 -d \
+        | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
         END_EPOCH=$($DATE --date="${END_DATE}" +"%s")
+        START_EPOCH=$($DATE --date="${START_DATE}" +"%s")
         DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
         DAY_REMAIN=$(expr $DIFF / 86400)
-        printf "%s\n" "==============================================="
-        printf "Project: %s\n" $PROJECT
-        printf "Secret: %s\n" $SECRET
-        printf "Expired after: %s\n" "$($DATE -d @$END_EPOCH)"
-        printf "Day remaining %s \n" $DAY_REMAIN
+        if [ $# -gt 0 ];
+        then
+            if [ $1 == "csv" ];
+            then
+                printf "%s\n" "$PROJECT,$SECRET,$($DATE -d @$START_EPOCH),$($DATE -d @$END_EPOCH),$DAY_REMAIN"
+            fi
+        else
+            printf "%s\n" "==============================================="
+            printf "Project: %s\n" $PROJECT
+            printf "Secret: %s\n" $SECRET
+            printf "Created at: %s\n" "$($DATE -d @$START_EPOCH)"
+            printf "Expired after: %s\n" "$($DATE -d @$END_EPOCH)"
+            printf "Day remaining %s \n" $DAY_REMAIN
+        fi
     done
 done
