@@ -74,6 +74,7 @@ do
         check kube-scheduler-client-cert-key 30
         check kubelet-client 30
         check kube-controller-manager-client-cert-key 30
+        # OpenShift 4.5 does not contain this cert
         check kube-apiserver-cert-syncer-client-cert-key 30
         if [ $NOT_ACTIVE -eq 0 ];
         then
