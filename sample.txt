@@ -19,47 +19,47 @@ Created at: 07-11-2022 00:00
 Expired after: 07-12-2022 08:25
 Day remaining 29 
 ===============================================
-Description: ETCD cert peer on ip-10-0-159-236.us-east-2.compute.internal
+Description: ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving on ip-10-0-159-236.us-east-2.compute.internal
+Description: ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving-metrics on ip-10-0-159-236.us-east-2.compute.internal
+Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert peer on ip-10-0-161-55.us-east-2.compute.internal
+Description: ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving on ip-10-0-161-55.us-east-2.compute.internal
+Description: ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving-metrics on ip-10-0-161-55.us-east-2.compute.internal
+Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert peer on ip-10-0-190-215.us-east-2.compute.internal
+Description: ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving on ip-10-0-190-215.us-east-2.compute.internal
+Description: ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 
 ===============================================
-Description: ETCD cert serving-metrics on ip-10-0-190-215.us-east-2.compute.internal
+Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal
 Created at: 07-11-2022 00:00
 Expired after: 06-11-2025 08:25
 Day remaining 1094 

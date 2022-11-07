@@ -2,15 +2,15 @@ External API,07-11-2022 00:00,07-12-2022 08:25,29
 Internal API,07-11-2022 00:00,07-12-2022 08:25,29
 Kube Controller Manager,07-11-2022 00:00,07-12-2022 08:25,29
 Kube Scheduler,07-11-2022 00:00,07-12-2022 08:25,29
-ETCD cert peer on ip-10-0-159-236.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-159-236.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-159-236.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert peer on ip-10-0-161-55.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-161-55.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-161-55.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert peer on ip-10-0-190-215.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-190-215.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-190-215.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
 Service-signer certificates,07-11-2022 00:00,05-01-2025 08:25,789
 Ingress ingress-certs-2022-11-07,07-11-2022 00:00,05-02-2023 07:41,89
 Ingress router-metrics-certs-default,07-11-2022 00:00,06-11-2024 08:26,729
