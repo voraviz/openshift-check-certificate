@@ -20,12 +20,13 @@ check(){
     DESC=$1
     PROJECT=$2
     SECRET=$3
+    ATTRIBUTE=":.data.tls\.crt"
     NOW_EPOCH=$($DATE +"%s")
     NOT_AFTER=$(oc get secret -n $PROJECT $SECRET \
-    -o yaml -o=custom-columns=":.data.tls\.crt" \
+    -o yaml -o=custom-columns="$ATTRIBUTE" \
     | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notAfter=' '{print $2}')
     NOT_BEFORE=$(oc get secret -n $PROJECT $SECRET \
-    -o yaml -o=custom-columns=":.data.tls\.crt" \
+    -o yaml -o=custom-columns="$ATTRIBUTE" \
     | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
     END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
     START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
@@ -62,9 +63,17 @@ check_ingress(){
          check=$(oc get secret $secret -n openshift-ingress -o jsonpath='{.data.tls\.crt}'|wc -c)
          if [ $check -gt 1 ];
          then
-            check "Ingress $secret" openshift-ingress $secret
+            check "Ingress <$secret>" openshift-ingress $secret
          fi
     done
+}
+check_monitoring(){
+    for secret in $(oc get secrets -n openshift-monitoring | egrep " kubernetes.io/tls" |awk '{print $1}')
+    do
+         check "Monitoring <$secret>" openshift-monitoring $secret
+    done
+    check "Monitoring <kube-etcd-client-certs>" openshift-monitoring kube-etcd-client-certs
+    check "Monitoring <grpc-tls>" openshift-monitoring grpc-tls
 }
 if [ $# -gt 0 ];
 then
@@ -84,6 +93,7 @@ check_etcd
 # Pending check Nodes
 check "Service-signer certificates" openshift-service-ca  signing-key
 check_ingress
-# Pending check Monitor / Logs
+check_monitoring
+# Pending check additional Monitoring / Logs
 
 
