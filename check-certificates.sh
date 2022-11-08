@@ -1,4 +1,12 @@
 #!/bin/bash
+test_login(){
+    oc whoami 1>/dev/null 2>&1
+    if [ $? -ne 0 ];
+    then
+        printf "You need to login with \"oc login\" before run this script"
+        exit 1
+    fi
+}
 set_date_cli(){
     OS=$(uname)
     if [ $OS = "Darwin" ];
@@ -20,31 +28,43 @@ check(){
     DESC=$1
     PROJECT=$2
     SECRET=$3
-    ATTRIBUTE=":.data.tls\.crt"
-    NOW_EPOCH=$($DATE +"%s")
-    NOT_AFTER=$(oc get secret -n $PROJECT $SECRET \
-    -o yaml -o=custom-columns="$ATTRIBUTE" \
-    | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notAfter=' '{print $2}')
-    NOT_BEFORE=$(oc get secret -n $PROJECT $SECRET \
-    -o yaml -o=custom-columns="$ATTRIBUTE" \
-    | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
-    END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
-    START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
-    END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
-    START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
-    DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
-    DAY_REMAIN=$(expr $DIFF / 86400)
-    if [ $OUTPUT = "csv" ];
+    if [ $# -eq 4 ];
     then
-         printf "$DESC,$START_DATE,$END_DATE,$DAY_REMAIN\n"
+        ATTRIBUTE="$4"
     else
-        printf "%s\n" "==============================================="
-        printf "Description: $DESC\n" 
-        printf "Created at: %s %s\n" $START_DATE
-        printf "Expired after: %s %s\n" $END_DATE
-        printf "Day remaining %s \n" $DAY_REMAIN
+        ATTRIBUTE=":.data.tls\.crt"
     fi
-    
+
+    oc get secret -n $PROJECT $SECRET \
+    -o yaml -o=custom-columns="$ATTRIBUTE" \
+    | tail -1 | base64 -d | openssl x509 -noout -enddate 1>/dev/null 2>&1
+
+    if [ $? -eq 0 ];
+    then
+        NOW_EPOCH=$($DATE +"%s")
+        NOT_AFTER=$(oc get secret -n $PROJECT $SECRET \
+        -o yaml -o=custom-columns="$ATTRIBUTE" \
+        | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notAfter=' '{print $2}')    
+        NOT_BEFORE=$(oc get secret -n $PROJECT $SECRET \
+        -o yaml -o=custom-columns="$ATTRIBUTE" \
+        | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
+        END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
+        START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
+        END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
+        START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
+        DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
+        DAY_REMAIN=$(expr $DIFF / 86400)
+        if [ $OUTPUT = "csv" ];
+        then
+            printf "$DESC,$START_DATE,$END_DATE,$DAY_REMAIN\n"
+        else
+            printf "%s\n" "==============================================="
+            printf "Description: $DESC\n" 
+            printf "Created at: %s %s\n" $START_DATE
+            printf "Expired after: %s %s\n" $END_DATE
+            printf "Day remaining %s \n" $DAY_REMAIN
+        fi
+    fi
 }
 check_etcd(){
     etcd_certs=("etcd-peer" "etcd-serving" "etcd-serving-metrics")
@@ -72,9 +92,28 @@ check_monitoring(){
     do
          check "Monitoring <$secret>" openshift-monitoring $secret
     done
-    check "Monitoring <kube-etcd-client-certs>" openshift-monitoring kube-etcd-client-certs
-    check "Monitoring <grpc-tls>" openshift-monitoring grpc-tls
+    check "Monitoring <kube-etcd-client-certs CA>" openshift-monitoring kube-etcd-client-certs ":.data.etcd-client-ca\.crt"
+    check "Monitoring <kube-etcd-client-certs Client Cert>" openshift-monitoring kube-etcd-client-certs ":.data.etcd-client\.crt"
+    check "Monitoring <prometheus-k8s-grpc-tls> Server CA" openshift-monitoring \
+    $(oc get secret -n openshift-monitoring | grep prometheus-k8s-grpc | awk '{print $1}') \
+    ":.data.server\.crt"
+    check "Monitoring <prometheus-k8s-grpc-tls> CA" openshift-monitoring \
+    $(oc get secret -n openshift-monitoring | grep prometheus-k8s-grpc | awk '{print $1}') \
+    ":.data.ca\.crt"
+    check "Monitoring <thanos-querier-grpc-tls> CA" openshift-monitoring \
+    $(oc get secret -n openshift-monitoring | grep thanos-querier-grpc-tls | awk '{print $1}') \
+    ":.data.ca\.crt"
+    check "Monitoring <thanos-querier-grpc-tls> Client Cert" openshift-monitoring \
+    $(oc get secret -n openshift-monitoring | grep thanos-querier-grpc-tls | awk '{print $1}') \
+    ":.data.client\.crt"
+    check "Monitoring <grpc-tls CA>" openshift-monitoring grpc-tls ":.data.ca\.crt"
+    check "Monitoring <grpc-tls Prometheus Server>" openshift-monitoring grpc-tls ":.data.prometheus-server\.crt"
+    check "Monitoring <grpc-tls Querier-Client>" openshift-monitoring grpc-tls ":.data.thanos-querier-client\.crt"
+
+    #check "Monitoring <grpc-tls>" openshift-monitoring grpc-tls
 }
+test_login
+set_date_cli
 if [ $# -gt 0 ];
 then
     if [ $1 = "csv" ];
@@ -84,7 +123,6 @@ then
 else
     OUTPUT="human"
 fi
-set_date_cli
 check "External API" openshift-kube-apiserver external-loadbalancer-serving-certkey 
 check "Internal API" openshift-kube-apiserver internal-loadbalancer-serving-certkey 
 check "Kube Controller Manager" openshift-kube-controller-manager kube-controller-manager-client-cert-key

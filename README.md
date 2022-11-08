@@ -38,4 +38,4 @@
   - [CSV](sample.csv)
   - [Text](sample.txt)
 
-Remark: pending check for nodes, logging and monitoring certificates
+Remark: Pending check for nodes and logging certificates
