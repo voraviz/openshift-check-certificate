@@ -1,16 +1,37 @@
-External API,07-11-2022 00:00,07-12-2022 08:25,29
-Internal API,07-11-2022 00:00,07-12-2022 08:25,29
-Kube Controller Manager,07-11-2022 00:00,07-12-2022 08:25,29
-Kube Scheduler,07-11-2022 00:00,07-12-2022 08:25,29
-ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert peer on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-ETCD cert serving-metrics on ip-10-0-xxx-xxx.us-east-2.compute.internal,07-11-2022 00:00,06-11-2025 08:25,1094
-Service-signer certificates,07-11-2022 00:00,05-01-2025 08:25,789
-Ingress ingress-certs-2022-11-07,07-11-2022 00:00,05-02-2023 07:41,89
-Ingress router-metrics-certs-default,07-11-2022 00:00,06-11-2024 08:26,729
+External API,08-11-2022 00:00,07-12-2022 10:13,28
+Internal API,08-11-2022 00:00,07-12-2022 10:13,28
+Kube Controller Manager,08-11-2022 00:00,07-12-2022 10:13,28
+Kube Scheduler,08-11-2022 00:00,07-12-2022 10:13,28
+ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal,08-11-2022 00:00,06-11-2025 10:13,1093
+Service-signer certificates,08-11-2022 00:00,05-01-2025 10:13,788
+Ingress <ingress-certs-2022-11-07>,08-11-2022 00:00,05-02-2023 09:38,88
+Ingress <router-metrics-certs-default>,08-11-2022 00:00,06-11-2024 10:14,728
+Monitoring <alertmanager-main-tls>,08-11-2022 00:00,06-11-2024 10:19,728
+Monitoring <cluster-monitoring-operator-tls>,08-11-2022 00:00,06-11-2024 10:13,728
+Monitoring <grafana-tls>,08-11-2022 00:00,06-11-2024 10:19,728
+Monitoring <kube-state-metrics-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <node-exporter-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <openshift-state-metrics-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <prometheus-adapter-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <prometheus-k8s-thanos-sidecar-tls>,08-11-2022 00:00,06-11-2024 10:19,728
+Monitoring <prometheus-k8s-tls>,08-11-2022 00:00,06-11-2024 10:19,728
+Monitoring <prometheus-operator-tls>,08-11-2022 00:00,06-11-2024 10:14,728
+Monitoring <telemeter-client-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <thanos-querier-tls>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <kube-etcd-client-certs CA>,08-11-2022 00:00,04-11-2032 10:09,3648
+Monitoring <kube-etcd-client-certs Client Cert>,08-11-2022 00:00,04-11-2032 10:09,3648
+Monitoring <prometheus-k8s-grpc-tls> Server CA,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <prometheus-k8s-grpc-tls> CA,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <thanos-querier-grpc-tls> CA,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <thanos-querier-grpc-tls> Client Cert,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <grpc-tls CA>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <grpc-tls Prometheus Server>,08-11-2022 00:00,06-11-2024 10:16,728
+Monitoring <grpc-tls Querier-Client>,08-11-2022 00:00,06-11-2024 10:16,728
