@@ -53,15 +53,18 @@ check(){
         END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
         START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
         DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
+        CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
         DAY_REMAIN=$(expr $DIFF / 86400)
+        DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
         if [ $OUTPUT = "csv" ];
         then
-            printf "$DESC,$START_DATE,$END_DATE,$DAY_REMAIN\n"
+            printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
         else
             printf "%s\n" "==============================================="
             printf "Description: $DESC\n" 
             printf "Created at: %s %s\n" $START_DATE
             printf "Expired after: %s %s\n" $END_DATE
+            printf "Certificate valid for %s days\n" $DAY_VALID
             printf "Day remaining %s \n" $DAY_REMAIN
         fi
     fi

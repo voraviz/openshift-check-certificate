@@ -1,185 +1,186 @@
 ===============================================
 Description: External API
-Created at: 08-11-2022 00:00
-Expired after: 07-12-2022 10:13
-Day remaining 28 
+Created at: 20-07-2023 00:00
+Expired after: 19-08-2023 15:20
+Certificate valid for 30 days
+Day remaining 29 
 ===============================================
 Description: Internal API
-Created at: 08-11-2022 00:00
-Expired after: 07-12-2022 10:13
-Day remaining 28 
+Created at: 20-07-2023 00:00
+Expired after: 19-08-2023 15:21
+Certificate valid for 30 days
+Day remaining 29 
 ===============================================
 Description: Kube Controller Manager
-Created at: 08-11-2022 00:00
-Expired after: 07-12-2022 10:13
-Day remaining 28 
+Created at: 20-07-2023 00:00
+Expired after: 19-08-2023 15:21
+Certificate valid for 30 days
+Day remaining 29 
 ===============================================
 Description: Kube Scheduler
-Created at: 08-11-2022 00:00
-Expired after: 07-12-2022 10:13
-Day remaining 28 
+Created at: 20-07-2023 00:00
+Expired after: 19-08-2023 15:21
+Certificate valid for 30 days
+Day remaining 29 
 ===============================================
-Description: ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
+Description: ETCD cert peer on ip-10-0-158-187.ap-southeast-1.compute.internal
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2026 15:20
+Certificate valid for 1095 days
+Day remaining 1094 
 ===============================================
-Description: ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
+Description: ETCD cert serving on ip-10-0-158-187.ap-southeast-1.compute.internal
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2026 15:20
+Certificate valid for 1095 days
+Day remaining 1094 
 ===============================================
-Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert peer on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert serving on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
-===============================================
-Description: ETCD cert serving-metrics on ip-10-0-xxx-xxx.ap-southeast-1.compute.internal
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2025 10:13
-Day remaining 1093 
+Description: ETCD cert serving-metrics on ip-10-0-158-187.ap-southeast-1.compute.internal
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2026 15:20
+Certificate valid for 1095 days
+Day remaining 1094 
 ===============================================
 Description: Service-signer certificates
-Created at: 08-11-2022 00:00
-Expired after: 05-01-2025 10:13
-Day remaining 788 
+Created at: 20-07-2023 00:00
+Expired after: 17-09-2025 15:20
+Certificate valid for 790 days
+Day remaining 789 
 ===============================================
-Description: Ingress <ingress-certs-2022-11-07>
-Created at: 08-11-2022 00:00
-Expired after: 05-02-2023 09:38
-Day remaining 88 
+Description: Ingress <ingress-certs-2023-07-20>
+Created at: 20-07-2023 00:00
+Expired after: 18-10-2023 14:40
+Certificate valid for 90 days
+Day remaining 89 
 ===============================================
 Description: Ingress <router-metrics-certs-default>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:14
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <alertmanager-main-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:19
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:33
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <cluster-monitoring-operator-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:13
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:21
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <grafana-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:19
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:28
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <kube-state-metrics-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <node-exporter-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <openshift-state-metrics-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <prometheus-adapter-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <prometheus-k8s-thanos-sidecar-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:19
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:28
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <prometheus-k8s-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:19
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:28
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <prometheus-operator-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:14
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:21
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <telemeter-client-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <thanos-querier-tls>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <kube-etcd-client-certs CA>
-Created at: 08-11-2022 00:00
-Expired after: 04-11-2032 10:09
-Day remaining 3648 
+Created at: 20-07-2023 00:00
+Expired after: 17-07-2033 14:57
+Certificate valid for 3650 days
+Day remaining 3649 
 ===============================================
 Description: Monitoring <kube-etcd-client-certs Client Cert>
-Created at: 08-11-2022 00:00
-Expired after: 04-11-2032 10:09
-Day remaining 3648 
+Created at: 20-07-2023 00:00
+Expired after: 17-07-2033 14:57
+Certificate valid for 3650 days
+Day remaining 3649 
 ===============================================
 Description: Monitoring <prometheus-k8s-grpc-tls> Server CA
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <prometheus-k8s-grpc-tls> CA
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <thanos-querier-grpc-tls> CA
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <thanos-querier-grpc-tls> Client Cert
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <grpc-tls CA>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <grpc-tls Prometheus Server>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
 ===============================================
 Description: Monitoring <grpc-tls Querier-Client>
-Created at: 08-11-2022 00:00
-Expired after: 06-11-2024 10:16
-Day remaining 728 
+Created at: 20-07-2023 00:00
+Expired after: 19-07-2025 15:22
+Certificate valid for 730 days
+Day remaining 729 
