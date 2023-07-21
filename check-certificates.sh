@@ -24,6 +24,29 @@ set_date_cli(){
         DATE=date
     fi
 }
+calculate(){
+    END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
+    START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
+    END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
+    START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
+    DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
+    CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
+    DAY_REMAIN=$(expr $DIFF / 86400)
+    DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
+}
+print_output(){
+     if [ $OUTPUT = "csv" ];
+        then
+            printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
+        else
+            printf "%s\n" "==============================================="
+            printf "Description: $DESC\n" 
+            printf "Created at: %s %s\n" $START_DATE
+            printf "Expired after: %s %s\n" $END_DATE
+            printf "Certificate valid for %s days\n" $DAY_VALID
+            printf "Day remaining %s \n" $DAY_REMAIN
+        fi
+}
 check(){
     DESC=$1
     PROJECT=$2
@@ -47,26 +70,28 @@ check(){
         | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notAfter=' '{print $2}')    
         NOT_BEFORE=$(oc get secret -n $PROJECT $SECRET \
         -o yaml -o=custom-columns="$ATTRIBUTE" \
-        | tail -1 | base64 -d | openssl x509 -noout -enddate|awk -F'notBefore=' '{print $2}')
-        END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
-        START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
-        END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
-        START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
-        DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
-        CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
-        DAY_REMAIN=$(expr $DIFF / 86400)
-        DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
-        if [ $OUTPUT = "csv" ];
-        then
-            printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
-        else
-            printf "%s\n" "==============================================="
-            printf "Description: $DESC\n" 
-            printf "Created at: %s %s\n" $START_DATE
-            printf "Expired after: %s %s\n" $END_DATE
-            printf "Certificate valid for %s days\n" $DAY_VALID
-            printf "Day remaining %s \n" $DAY_REMAIN
-        fi
+        | tail -1 | base64 -d | openssl x509 -noout -startdate|awk -F'notBefore=' '{print $2}')
+        calculate
+        # END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
+        # START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
+        # END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
+        # START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
+        # DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
+        # CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
+        # DAY_REMAIN=$(expr $DIFF / 86400)
+        # DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
+        print_output
+        # if [ $OUTPUT = "csv" ];
+        # then
+        #     printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
+        # else
+        #     printf "%s\n" "==============================================="
+        #     printf "Description: $DESC\n" 
+        #     printf "Created at: %s %s\n" $START_DATE
+        #     printf "Expired after: %s %s\n" $END_DATE
+        #     printf "Certificate valid for %s days\n" $DAY_VALID
+        #     printf "Day remaining %s \n" $DAY_REMAIN
+        # fi
     fi
 }
 check_etcd(){
@@ -115,6 +140,21 @@ check_monitoring(){
 
     #check "Monitoring <grpc-tls>" openshift-monitoring grpc-tls
 }
+check_nodes(){
+    kubelet=("kubelet-server-current.pem" "kubelet-client-current.pem" )
+    for node in $(oc get nodes --no-headers -o custom-columns='Name:.metadata.name')
+    do
+       for cert in "${kubelet[@]}"
+       do
+         DESC="$node ($cert)"
+         NOW_EPOCH=$($DATE +"%s")
+         NOT_BEFORE=$(oc debug node/$node -- chroot /host cat /var/lib/kubelet/pki/$cert 1>/dev/null 2>&1| openssl x509  -noout -startdate|awk -F'notBefore=' '{print $2}')
+         NOT_AFTER=$(oc debug node/$node -- chroot /host cat /var/lib/kubelet/pki/$cert 1>/dev/null 2>&1 | openssl x509  -noout -enddate|awk -F'notAfter=' '{print $2}')
+        calculate
+        print_output
+       done
+   done
+}
 test_login
 set_date_cli
 if [ $# -gt 0 ];
@@ -131,10 +171,11 @@ check "Internal API" openshift-kube-apiserver internal-loadbalancer-serving-cert
 check "Kube Controller Manager" openshift-kube-controller-manager kube-controller-manager-client-cert-key
 check "Kube Scheduler" openshift-kube-scheduler kube-scheduler-client-cert-key 
 check_etcd
-# Pending check Nodes
 check "Service-signer certificates" openshift-service-ca  signing-key
 check_ingress
 check_monitoring
+check_nodes
+
 # Pending check additional Monitoring / Logs
 
 
