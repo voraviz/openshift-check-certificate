@@ -33,18 +33,33 @@ calculate(){
     CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
     DAY_REMAIN=$(expr $DIFF / 86400)
     DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
+    HOUR_VALID=$(expr $CERT_VALID_FOR / 3600)
+    HOUR_REMAIN=$(expr $CERT_VALID_FOR / 3600)
 }
 print_output(){
      if [ $OUTPUT = "csv" ];
         then
-            printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
+            if [ $DAY_VALID -gt 0 ];
+            then 
+                printf $DESC","$START_DATE","$END_DATE","$DAY_VALID"h,"$DAY_REMAIN"d\n"
+            else
+                printf $DESC","$START_DATE","$END_DATE","$HOUR_VALID"h,"$HOUR_REMAIN"h\n"
+            fi 
+            
         else
             printf "%s\n" "==============================================="
             printf "Description: $DESC\n" 
             printf "Created at: %s %s\n" $START_DATE
             printf "Expired after: %s %s\n" $END_DATE
-            printf "Certificate valid for %s days\n" $DAY_VALID
-            printf "Day remaining %s \n" $DAY_REMAIN
+            
+            if [ $DAY_VALID -gt 0 ];
+            then 
+                printf "Certificate valid for %s days\n" $DAY_VALID
+                printf "Day remaining %s \n" $DAY_REMAIN
+            else
+                printf "Certificate valid for %s hours\n" $HOUR_VALID
+                printf "Hour remaining %s \n" $HOUR_REMAIN   
+            fi 
         fi
 }
 check(){
@@ -72,26 +87,8 @@ check(){
         -o yaml -o=custom-columns="$ATTRIBUTE" \
         | tail -1 | base64 -d | openssl x509 -noout -startdate|awk -F'notBefore=' '{print $2}')
         calculate
-        # END_EPOCH=$($DATE --date="${NOT_AFTER}" +"%s")
-        # START_EPOCH=$($DATE --date="${NOT_BEFORE}" +"%s")
-        # END_DATE=$($DATE  -d @$END_EPOCH +'%d-%m-%Y %H:%M')
-        # START_DATE=$($DATE  -d @$START_EPOCH +'%d-%m-%Y %H:%M')
-        # DIFF=$(expr $END_EPOCH - $NOW_EPOCH)
-        # CERT_VALID_FOR=$(expr $END_EPOCH - $START_EPOCH)
-        # DAY_REMAIN=$(expr $DIFF / 86400)
-        # DAY_VALID=$(expr $CERT_VALID_FOR / 86400)
         print_output
-        # if [ $OUTPUT = "csv" ];
-        # then
-        #     printf "$DESC,$START_DATE,$END_DATE,$DAY_VALID,$DAY_REMAIN\n"
-        # else
-        #     printf "%s\n" "==============================================="
-        #     printf "Description: $DESC\n" 
-        #     printf "Created at: %s %s\n" $START_DATE
-        #     printf "Expired after: %s %s\n" $END_DATE
-        #     printf "Certificate valid for %s days\n" $DAY_VALID
-        #     printf "Day remaining %s \n" $DAY_REMAIN
-        # fi
+
     fi
 }
 check_etcd(){
